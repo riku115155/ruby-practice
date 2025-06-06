@@ -1,12 +1,12 @@
 N = 21
-File.open("data_cos.csv", "w") do |f|
+File.open("data_cos.csv", "w") { |f|
   f.printf("t,theta_cos")
-  (0...N).each do |i|
+  (0...N).each { |i|
     t     = i.to_f / (N - 1)           # 0.00, 0.05, …, 1.00
     theta = 180 * (1 - Math.cos(Math::PI * t)) / 2
     f.printf("%.2f,%.3f\n", t, theta)
-  end
-end
+  }
+}
 
 printf("✅ data_cos.csv を生成しました\n")
 # Gnuplot に渡す各変数を定義

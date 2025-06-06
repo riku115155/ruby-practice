@@ -2,15 +2,15 @@ def sigmo(x)
   180.0 / (1 + Math.exp(-6.0 * (x - 0.5)))
 end
 
-File.open("data_sigmoid.csv", "w") do |f|
+File.open("data_sigmoid.csv", "w") { |f|
   f.printf("t,theta\n")
-  (0..20).each do |i|
+  (0..20).each { |i|
     t     = i.to_f / 20
     basic = 180 * (1.0 / (1 + Math.exp(-6.0 * (t - 0.5))))
     theta = (basic - sigmo(0.5)) * 90 / (sigmo(1.0) - sigmo(0.5)) + sigmo(0.5)
     f.printf("%.5f,%.5f\n", t, theta)
-  end
-end
+  }
+}
 printf("✓ data_sigmoid.csv を生成しました\n")
 
 # Gnuplot に渡す各変数を定義

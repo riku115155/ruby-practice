@@ -1,17 +1,20 @@
-#修正点：Dirを使わない、gnuplotを呼び出して実行
-# ARGV に渡された CSV ファイルをすべて処理
-#再修正：一つのファイルを指定したときに画像が出力されるようにした
-#(例)ruby 2-1.rb 2020/0101.csv　と実行すればひとつのグラフだけ表示される
+#!/usr/bin/env ruby
+# -*- coding: utf-8 -*-
 
 if ARGV.length != 1
-  puts "ファイル名入力してください"
+  puts "使い方: ./plot.gp <csvファイル>"
   exit 1
 end
+
 csv_file = ARGV.first
 year     = File.dirname(csv_file)
 name     = File.basename(csv_file, ".csv")
-svg_file = "fig/#{year}/#{name}_1.svg"
+svg_file = "fig/#{year}/#{name}.svg"
 date_title = "#{year}-#{name[0,2]}-#{name[2,2]}"
+
+# ディレクトリ作成
+require 'fileutils'
+FileUtils.mkdir_p("fig/#{year}")
 
 gnuplot_commands = <<~GP
   set datafile separator ","

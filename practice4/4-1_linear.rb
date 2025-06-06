@@ -1,12 +1,12 @@
 N = 21
-File.open("data_linear.csv", "w") do |f|
+File.open("data_linear.csv", "w") { |f|
   f.printf("t,theta")
-  (0...N).each do |i|
+  N.times { |i|
     t     = i.to_f / (N - 1)
     theta = t * 180
     f.printf("%.2f,%.1f\n", t, theta)
-  end
-end
+  }
+}
 printf("✓ data_linear.csv を生成しました\n")
 
 # Gnuplot に渡す各変数を定義
